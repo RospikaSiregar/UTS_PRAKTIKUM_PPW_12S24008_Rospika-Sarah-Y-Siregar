@@ -7,6 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class equipments extends Model
 {
-    /** @use HasFactory<\Database\Factories\EquipmentsFactory> */
+    
     use HasFactory;
+
+    protected $table = 'equipments';
+    protected $fillable = ['category_id', 'asset_code', 'name', 'specification', 'condition', 'status', 'daily_rental_fee', 'image_path'];
+
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function loanRequests() {
+        return $this->hasMany(LoanRequest::class);
+    }
 }
